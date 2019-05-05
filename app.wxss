@@ -1,0 +1,124 @@
+/* 使用class 调用flex */
+@import './styles/flex-base.wxss';
+
+/* color */
+.__color_666 {
+    color: #666;
+}
+.__color_F0F0F0 {
+    color: #f0f0f0;
+}
+.__color_fff {
+    color: #fff;
+}
+.__color_888 {
+    color: #888;
+}
+.__color_999 {
+    color: #999999;
+}
+.__color_bbb {
+    color: #bbbbbb;
+}
+.__color_242424 {
+    color: #242424;
+}
+.__color_FE5C3B {
+    color: #fe5c3b;
+}
+.__color_36C585{
+    color:#36C585;
+}
+.__color_87CF38{
+    color: #87CF38;
+}
+.__color_FF5B31{
+    color: #FF5B31;
+}
+
+
+.__bg_87CF38 {
+    background: #87CF38;
+}
+.__bg_FEBC2E {
+    background: #febc2e;
+}
+.__bg_FE5C3B {
+    background: #fe5c3b;
+}
+.__bg_fff {
+    background: #fff;
+}
+.__bg_F0F0F0 {
+    background: #f0f0f0;
+}
+
+/* font */
+.__f13 {
+    font-size: 26rpx;
+}
+.__f14 {
+    font-size: 28rpx;
+}
+.__f15{
+    font-size: 30rpx;
+}
+.__f16 {
+    font-size: 32rpx;
+}
+.__f18 {
+    font-size: 36rpx;
+}
+.__f22{
+    font-size: 22px;
+}
+/* flex */
+.flex-item-auto {
+    flex: 1 1 auto;
+}
+
+.flex-item-none {
+    flex: none;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-item-auto {
+    flex: 1 1 auto;
+}
+
+.flex-item-none {
+    flex: none;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+page {
+    height: 100vh;
+    background: #fefefe;
+    box-sizing: border-box;
+    /* padding-top: 140rpx; */
+    font-size: 28rpx;
+}
+
+.contain{
+    height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+}
+.custom-title-extend {
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+    z-index: 100;
+}

@@ -1,0 +1,8 @@
+var replaceUserName = function(txt, name) {
+    name = name || '我';
+    var nameReg = getRegExp("\[_name\]", 'ig');
+    return txt.replace(nameReg, name);
+};
+module.exports = {
+    replaceUserName: replaceUserName
+};

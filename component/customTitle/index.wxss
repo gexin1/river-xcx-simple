@@ -1,0 +1,85 @@
+@import './icon.wxss';
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.disable {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.custom-title {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 92rpx;
+    width: 100%;
+    position: relative;
+}
+.custom-title .btn {
+    position: relative;
+    height: 100%;
+    height: 100%;
+    line-height: 92rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+}
+.custom-title .btn button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.custom-title .btn.left {
+    padding-right: 0rpx;
+    left: 0;
+}
+.custom-title .btn.right {
+    padding-left: 0rpx;
+    right: 0;
+}
+.custom-title .btn.left .icon {
+    margin-left: 18rpx;
+}
+.custom-title .btn.right .icon {
+    margin-right: 18rpx;
+}
+.custom-title .btn .icon {
+    width: 32rpx;
+    height: 32rpx;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+.custom-title .btn .text {
+    color: #1989fa;
+    font-size: 28rpx;
+    padding: 0 15rpx;
+}
+.custom-title .center .text {
+    color: #323233;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+.custom-title .center {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    line-height: 92rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.custom-title .center .text {
+    padding-right: 90px;
+    box-sizing: border-box;
+    padding-left: 90px;
+}
+.btn-hover {
+    background: #ddd;
+}

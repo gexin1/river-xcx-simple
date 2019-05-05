@@ -1,0 +1,23 @@
+<view class="model {{show?'show':''}}" bindtap='_on_close' data-position='BG'>
+  <view class="dialog">
+    <view class='title' wx:if="{{header}}">
+      <text>{{title}}</text>
+      <view class='close' wx:if="{{iconClose}}" hover-class='click-effect' capture-catch:tap='_on_close' data-position='ICON'>
+        <view class='icon'></view>
+       </view>
+    </view>
+    <view class='content custom-content-extend' style='background:#fff;'>
+      <slot />
+    </view>
+    <view class='footer' wx:if="{{footer}}">
+      <view class='btn' hover-class='click-effect' wx:if='{{!left.hide}}' data-isemit="{{left.type}}" catch:tap='_on_close' data-position='BTN'>
+        <button wx:if='{{left.type}}' open-type="{{left.type}}"></button>
+        <text style='color:{{left.color}}'>{{left.text}}</text>
+      </view>
+      <view class='btn' hover-class='click-effect' wx:if='{{!right.hide}}' data-isemit="{{right.type}}" catch:tap='_on_confirm'>
+        <button wx:if='{{right.type}}' open-type="{{right.type}}" bindgetuserinfo='getUserInfo'></button>
+        <text  style='color:{{right.color}}'>{{right.text}}</text>
+      </view>
+    </view>
+  </view>
+</view>

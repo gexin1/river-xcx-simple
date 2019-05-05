@@ -1,0 +1,34 @@
+<view class='custom-title-extend' style='padding-top:{{distanceTopHeight}}px'>
+	<view class='custom-title'>
+		<view
+		 wx:if='{{!left.hide}}'
+		 class="left btn"
+		 hover-class='btn-hover'
+		 data-link="{{left.dataLink}}"
+		 data-type="{{left.linkType}}"
+		 data-isemit="{{left.type}}"
+		 catchtap='_leftClick'
+		>
+			<button wx:if="{{left.type}}" open-type='{{left.type}}' />
+			<view class='icon {{left.icon}}'/>
+			<view class='text'>{{left.text}}</view>
+		</view>
+		<view class='center'>
+			<view class='text text-ellipsis'>{{title}}</view>
+		</view>
+		<view
+		 wx:if='{{!right.hide}}'
+		 class="right btn"
+		 hover-class="btn-hover"
+		 data-link="{{right.dataLink}}"
+		 data-type="{{right.linkType}}"
+		 data-isemit="{{right.type}}"
+		 catchtap='_rightClick'
+		>
+			<button wx:if="{{right.type}}" open-type='{{right.type}}' />
+			<view class='text'>{{right.text}}</view>
+			<view class='icon' />
+		</view>
+	</view>
+</view>
+

@@ -1,0 +1,8 @@
+<view class="contain" style="padding-top:calc({{navTop}}px + 92rpx);{{afterPullDown}}">
+    <custom-title
+        custom-title-extend="custom-title-extend"
+        left-btn="{{leftBtn}}"
+        auto-navigation="{{autoNavigation}}"
+    />
+    <view class="index_contain" />
+</view>;
