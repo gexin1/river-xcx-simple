@@ -1,7 +1,7 @@
 const config = {
-    appid: 'wx84883400d4b00ae3',
-    host: 'https://zhongcao.zmwxxcx.com', //业务
-    commonHost: 'https://zhongcao.zmwxxcx.com',
+    appid: 'wxdb2011c6d502853c',
+    host: 'https://wish1.zmwxxcx.com',
+    commonHost: 'https://common.zmwxxcx.com',
     storeMode: 'GLOBAL', //STORAGE 模式
     Platform: `MINI`,
     Via: `MINI`

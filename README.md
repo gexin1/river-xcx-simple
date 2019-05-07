@@ -4,39 +4,39 @@
 
 * api 
    * common-api  
-    >项目所有的公共api 存放
+     * 项目所有的公共api 存放
    * *-api 
-    >项目其他api 存放
+     * 项目其他api 存放
 * lib 
->存放项目公共的一些依赖
+  * 存放项目公共的一些依赖
 * template 
->一些公共的template 模版文件
-* utils //公共方法
+  * 一些公共的template 模版文件
+* utils
   * promisify.js
-   >一些api 返回变为promise 同时在初始化启动的时候把 
-   >pify*的api挂载在wx对象上
+    * 一些api 返回变为promise 同时在初始化启动的时候把 
+    * pify*的api挂载在wx对象上
+    * 跳转路由可以使用 pify 封装promise话的路由
   * promisify-finally.js
-   > 给promise增加finally兼容 初始化的时候会加上
+    * 给promise增加finally兼容 初始化的时候会加上
   * util.js
-   > 一些公共方法存放
+    * 一些公共方法存放
   * util.wxs
-   > 一些公共的wxs存放
+    * 一些公共的wxs存放
   * update-app.js
-   >小程序更新后提示用户重启更新 默认在init-start引入
+    * 小程序更新后提示用户重启更新 默认在init-start引入
 * config.js 
->项目公共配置
-* data-statistics //数据埋点 
->里边可以封装对项目的埋点
+  * 项目公共配置
+* data-statistics
+  * 里边可以封装对项目的埋点
 * init-start 
->初始化启动 会把promise的api挂载在wx上
+  *  初始化启动 会把promise的api挂载在wx上
 * store 
->全局数据存储
-```
+  *  全局数据存储
+
 
 ### 项目格式
 * js 使用 vscode pretter
 * wxml fromat  使用 vscode wxml
-
 ### 优化
 [腾讯文档优化建议](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/tips.html)
 
@@ -89,6 +89,10 @@ wx.chooseImage
 
 > 因为这个api 调用的是原生组件有时候在部分会比较卡 具体表现为选择完图片会卡住等一会才会到成功回调
 
+```
+wx.showToast
+```
+> wx.showToast 在wx.hideloading 之前会被快速关闭
 ### wxss
 
 * flex 布局

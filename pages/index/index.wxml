@@ -4,5 +4,4 @@
         left-btn="{{leftBtn}}"
         auto-navigation="{{autoNavigation}}"
     />
-    <view class="index_contain" />
-</view>;
+</view>

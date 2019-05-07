@@ -2,11 +2,14 @@ import { ajax, upload } from '../utils/util';
 import { pify } from '../utils/promisify';
 import config from '../config/index';
 
+import { addLogin, delLogin, getLogin, isLogin } from '../store/login/index';
+
 const url = {
     common: {
-        allConfig: `${config.commonHost}/xcx/get-app-config`,
+        login: `${config.commonHost}/xcx/login`,
+        pay: `${config.commonHost}/xcxpay/pay`,
         saveadvid: `${config.commonHost}/xcx/saveadvid`,
-        uploadFile: `${config.commonHost}/gateway/api/system/upload`
+        upload: `${config.commonHost}/upload/upload`
     }
 };
 
@@ -18,28 +21,27 @@ const url = {
  */
 const login = function(data = null) {
     if (data) {
-        wx.removeStorageSync('userClient');
+        delLogin();
     }
-    return pify(wx.getStorage)({
-        key: 'userClient'
-    })
-        .then(res => {
-            let { Cookie:Token, UserInfo } = res.data;
-            if (Token) {
-                //未过期
-                return {
-                    Token,
-                    UserInfo
-                };
-            }
-            //已过期 重新进行登录
-            else {
-                return wxLogin(data);
-            }
-        })
-        .catch(err => {
+
+    if (isLogin()) {
+        const res = getLogin();
+        let { Token, Expire, UserID, IsNewUser } = res;
+        if (Token && Expire && new Date().getTime() < Expire * 1000) {
+            //未过期
+            return Promise.resolve({
+                Token,
+                UserID,
+                IsNewUser
+            });
+        }
+        //已过期 重新进行登录
+        else {
             return wxLogin(data);
-        });
+        }
+    } else {
+        return wxLogin(data);
+    }
 };
 
 /**
@@ -48,48 +50,44 @@ const login = function(data = null) {
 const wxLogin = function(data = null) {
     return pify(wx.login)()
         .then(res => {
-            if (res.errMsg === 'login:ok') {
-                const params = {
-                    Code: res.code
-                };
-                if (data && typeof data === 'object') {
-                    let {
-                        userInfo: { nickName = '', avatarUrl = '' },
-                        encryptedData = '',
-                        iv = ''
-                    } = data;
-                    Object.assign(params, { nickName, avatarUrl, encryptedData, iv });
-                }
-
-                return ajax({
-                    url: '/gateway/api/login/wx-open',
-                    method: 'POST',
-                    data: params
-                });
+            const params = {
+                code: res.code
+            };
+            if (data && typeof data === 'object') {
+                let {
+                    userInfo: { nickName = '', avatarUrl = '' },
+                    encryptedData = '',
+                    iv = ''
+                } = data;
+                Object.assign(params, { nickName, avatarUrl, encryptedData, iv });
             }
+            return ajax({
+                url: url.common.login,
+                method: 'POST',
+                data: params
+            });
         })
         .then(res => {
-            if (res.flag === 1) {
-                //设置本地storage
+            if (res.f === 1) {
                 let {
-                    data,
-                    data: { Cookie, UserInfo }
+                    d,
+                    d: { Token, UserID, IsNewUser }
                 } = res;
-
-                wx.setStorageSync('userClient', data);
-                return {
-                    Token: Cookie,
-                    UserInfo
-                };
+                addLogin(d);
+                return Promise.resolve({
+                    Token,
+                    UserID,
+                    IsNewUser
+                });
             } else {
                 throw res;
             }
         })
         .catch(err => {
             console.log(err);
+            return Promise.reject(err);
         });
 };
-
 /**
  * 上传 formId
  * @param {* formId} formId
@@ -116,7 +114,7 @@ const pay = function(fee, from = '') {
     return login()
         .then(res => {
             return ajax({
-                url: '/xcxpay/pay',
+                url: url.common.pay,
                 Token: res.Token,
                 data: {
                     name: '打赏',
@@ -144,38 +142,22 @@ const pay = function(fee, from = '') {
 };
 
 /**
- * 更新 头像 昵称 等信息
+ * 上传接口
+ * @param {String} filePath 微信的临时路径
+ * @returns {Promise}
  */
-const updateUserInfo = function(user, issend = '1') {
-    return login().then(res => {
-        let { Token } = res;
-        return ajax({
-            url: '/xcx/update-user',
-            Token,
-            method: 'POST',
-            data: {
-                nickName: user.nickName,
-                gender: user.gender,
-                avatarUrl: user.avatarUrl,
-                city: user.city,
-                province: user.province,
-                country: user.country,
-                IsAcceptPush: issend
-            }
-        });
-    });
-};
-
 const uploadFile = filePath => {
     return upload({
-        url: url.common.uploadFile,
+        url: url.common.upload,
         filePath,
         name: 'file'
     });
 };
-
+/**
+ * 获取用户的登陆信息
+ */
 const getUserInfo = () => {
     return login();
 };
 
-export { login, submitFormId, pay, updateUserInfo, uploadFile, getUserInfo };
+export { login, submitFormId, pay, uploadFile, getUserInfo };

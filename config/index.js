@@ -1,15 +1,15 @@
 import commonConfig from './common';
-import devConfig from "./dev.js";
-const mode='PRO';
+import devConfig from './dev.js';
+const mode = 'DEV';
 // const mode = 'DEV';
 
-let config={};
+let config = {};
 
-if (mode ==='PRO'){
-  config=devConfig;
+if (mode === 'DEV') {
+    config = devConfig;
 }
 
 export default {
-  ...commonConfig,
-  ...config
+    ...commonConfig,
+    ...config
 };

@@ -1,6 +1,4 @@
 {
-    "usingComponents": {
-        "dialog": "../../component/dialog/index"
-    },
+    "usingComponents": {},
     "enablePullDownRefresh": true
 }

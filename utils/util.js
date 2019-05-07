@@ -30,8 +30,16 @@ const getErrorMsg = (err, defaultMsg = '') => {
     return errorMsg;
 };
 /**
- *
- * @param {*} param0
+ * 封装上传接口
+ * @param {Object} param
+ * @param {String} url 上传的地址
+ * @param {String} filePath 小程序内的临时路径
+ * @param {Object} header http请求头信息
+ * @param {String} name 传递的formData的字段名字
+ * @param {Object} formData 额外的参数
+ * @param {Boolean} loading 请求的时候是否启动Loading
+ * @param {String} Token 登陆的token
+ * @returns {Promise}
  */
 const upload = function({ url, filePath, name = 'file', header = {}, formData = {}, loading = false, Token = '' }) {
     if (loading) {
@@ -39,11 +47,7 @@ const upload = function({ url, filePath, name = 'file', header = {}, formData = 
             title: '加载中...'
         });
     }
-    header['cookie'] = `AppId=${config.appid};Via=MINI;Platform=MINI;Token=${Token}`;
-
-    formData.Platform = config.Platform;
-    formData.Via = config.Via;
-    formData.AppId = config.appid;
+    header['cookie'] = `AppKey=${config.appid};Token=${Token}`;
 
     return new Promise((resolve, reject) => {
         pifyUploadFile({
@@ -56,8 +60,8 @@ const upload = function({ url, filePath, name = 'file', header = {}, formData = 
             .then(res => {
                 if (res.statusCode == 200) {
                     let _data = JSON.parse(res.data);
-                    if (_data.flag !== 1) {
-                        throw _data.msg;
+                    if (_data.f !== 1) {
+                        throw _data.m;
                     }
                     resolve(_data);
                 }
@@ -75,9 +79,16 @@ const upload = function({ url, filePath, name = 'file', header = {}, formData = 
 };
 
 /**
- * @param obj {}
+ * 接口请求
+ * @param {Object} obj
+ * @param {String} obj.url 接口的请求地址
+ * @param {Object} obj.header 接口的请求头部信息
+ * @param {String} obj.method 接口的请求方法
+ * @param {String} obj.Token 接口的请求登录的token
+ * @param {Boolean} obj.loading 接口的请求登录是否启动loading
+ * @param {Boolean} obj.loading 接口的请求登录是否启动loading
+ * @param {Boolean} obj.toast  拦截接口错误信息并弹出toast
  * @returns {Promise}
- * @description 接口请求
  */
 
 const ajax = function(obj = {}) {
@@ -93,23 +104,24 @@ const ajax = function(obj = {}) {
         toast: true,
         data: {}
     };
-
+    // 拷贝默认参数
     Object.assign(options, obj);
-
+    //增加一些认证
     options.data.Platform = config.Platform;
     options.data.Via = config.Via;
     options.data.AppId = config.appid;
-
+    //是否启动loading
     if (options.loading) {
         wx.showLoading({
             title: '加载中...'
         });
     }
-
+    //绑定 token 增加一些请求参数
     options.url = (options.url.indexOf('http') > -1 ? '' : config.commonHost) + options.url;
     options.method = options.method.toUpperCase();
     options.method === 'POST' ? (options.header['Content-Type'] = 'application/x-www-form-urlencoded') : '';
-    options.header['cookie'] = options.Token;
+    options.header['cookie'] = `AppKey=${config.appid};Token=${options.Token}`;
+
     let errToast = true;
     return new Promise((resolve, reject) => {
         pifyRequest(options)
@@ -119,36 +131,10 @@ const ajax = function(obj = {}) {
                 }
                 try {
                     let _data = res.data;
-                    if (_data.flag === 1) {
+                    if (_data.f === 1) {
                         return resolve(_data);
-                    } else if (_data.flag == -100) {
-                        //重新登录
-                        wx.removeStorageSync('userClient');
-                        //暂时这样写
-                        wx.switchTab({
-                            url: '/pages/index/index'
-                        });
-                        throw _data.msg;
-                    } else if (_data.data.type === 'usertask') {
-                        errToast = false;
-                        throw _data.data;
-                    } else if (_data.data.type === 'info') {
-                        errToast = false;
-                        wx.pifyShowModel({
-                            title: '提示',
-                            content: _data.data.msg
-                        }).then(res => {
-                            if (res.confirm) {
-                                wx.navigateTo({
-                                    url: '/pages/perfect-info/perfect-info?type=other'
-                                });
-                            }
-                        });
-                        throw _data.data.msg;
-                    } else if (_data.data.type === 'task') {
-                        throw _data.data.msg;
                     } else {
-                        throw _data.msg;
+                        throw _data.m;
                     }
                 } catch (err) {
                     throw err;
@@ -168,6 +154,10 @@ const ajax = function(obj = {}) {
 /**
  * 请求用户授权
  * @param {*options} checkAuth 授予权限 {scope:'scope.userLocation'}
+ * @example
+ * authorityControl({scope:'scope.userLocation'},()=>{
+ *      //成功的回调
+ * })
  * @description
  * 微信授权必须是同步模式 打开openSetting promise不能使用 改为callback
  */
@@ -238,6 +228,8 @@ const authorityControl = (options = {}, callback = () => {}) => {
 
 /**
  * 检查一个值是否为空
+ * @param {*} value
+ * @returns {Boolean}
  */
 function isEmpty(value) {
     if (Array.isArray(value)) {
@@ -256,6 +248,7 @@ function isEmpty(value) {
 /**
  * 把Object对象拼接为字符串
  * @param {Object} data
+ * @returns {String}  ?a=1&b=2
  */
 function queryToString(data = {}) {
     let str = ``;

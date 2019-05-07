@@ -1,4 +1,4 @@
-const config = wx.$config;
+import config from '../config/index';
 const app = getApp();
 /**
  * 储存值
@@ -29,7 +29,7 @@ const getValue = (key, mode) => {
     }
 };
 /**
- *
+ * 删除储存的值
  * @param {*} key
  * @param {*} mode
  */

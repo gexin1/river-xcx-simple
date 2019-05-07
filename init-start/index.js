@@ -2,7 +2,9 @@ import config from '../config/index';
 import '../utils/promisify-finally';
 //更新提示
 import '../utils/update-app';
+
 import req from '../api/index';
+
 import * as promisify from '../utils/promisify';
 //小程序配置
 wx.$config = config;

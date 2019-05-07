@@ -45,25 +45,54 @@ const pifyShowModel = pify(wx.showModal);
 const pifyAuthorize = pify(wx.authorize);
 
 const pifyOpenSetting = pify(wx.openSetting);
-
+/**
+ * 默认title icon为none
+ * @param {String} title
+ */
 const pifyShowToastErr = title => pify(wx.showToast, { icon: 'none' })({ title });
 
 const pifySetClipboardData = pify(wx.setClipboardData);
-
+/**
+ * 封装导航
+ * @param {Object} url 跳转的路径  query参数
+ * @example
+ * wx.pifyNavigateTo({
+ *  url:'/pages/detail/detail',
+ *  query:{
+ *  a:1
+ *  }
+ * })
+ */
 const pifyNavigateTo = ({ url = '', query = {} }) => {
     url += queryToString(query);
     return pify(wx.navigateTo)({
         url: url
     });
 };
-
+/**
+ * 跳转tab
+ * @param {Object} url 跳转的路径
+ */
 const pifySwitchTab = ({ url }) => {
     return pify(wx.switchTab)({
         url: url
     });
 };
-
-const pifyRedirectTo = ({ url='',query={} }) => {
+/**
+ * 关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面。
+ * @param {*} url 跳转的路径  query参数
+ */
+const pifyRedirectTo = ({ url = '', query = {} }) => {
+    url += queryToString(query);
+    return pify(wx.redirectTo)({
+        url: url
+    });
+};
+/**
+ * 关闭所有页面，打开到应用内的某个页面
+ * @param {Object} url 跳转的路径  query参数
+ */
+const pifyReLaunch = ({ url = '', query = {} }) => {
     url += queryToString(query);
     return pify(wx.redirectTo)({
         url: url
@@ -83,5 +112,6 @@ export {
     pifySetClipboardData,
     pifyNavigateTo,
     pifySwitchTab,
-    pifyRedirectTo
+    pifyRedirectTo,
+    pifyReLaunch
 };
