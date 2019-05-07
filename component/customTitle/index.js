@@ -56,7 +56,7 @@ Component({
     },
     attached() {
         let {
-            device: { statusBarHeight, model }
+            device: { statusBarHeight }
         } = app.globalData;
         this.setData({
             distanceTopHeight: statusBarHeight

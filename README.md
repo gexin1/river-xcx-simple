@@ -35,10 +35,15 @@
 
 
 ### 项目格式
+
 * js 使用 vscode pretter
 * wxml fromat  使用 vscode wxml
+
 ### 优化
 [腾讯文档优化建议](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/tips.html)
+
+### project.config.json 配置
+打包忽略配置文件 [如何配置](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html)
 
 ### JS
 ``` javascript
@@ -93,6 +98,7 @@ wx.chooseImage
 wx.showToast
 ```
 > wx.showToast 在wx.hideloading 之前会被快速关闭
+
 ### wxss
 
 * flex 布局

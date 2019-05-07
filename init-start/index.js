@@ -2,9 +2,9 @@ import config from '../config/index';
 import '../utils/promisify-finally';
 //更新提示
 import '../utils/update-app';
-
+//挂载 request请求
 import req from '../api/index';
-
+//导入所有promisify
 import * as promisify from '../utils/promisify';
 //小程序配置
 wx.$config = config;
@@ -20,6 +20,7 @@ wx.$shareMessage = () => {
         title: '写文章,晒图片,轻松赚钱'
     };
 };
+
 
 function mountPifyApi() {
     Object.keys(promisify).forEach(key => {

@@ -1,5 +1,5 @@
-import { ajax, upload } from '../utils/util';
-import { pify } from '../utils/promisify';
+import { ajax, upload, getErrorMsg } from '../utils/util';
+import { pify, pifyShowToastErr } from '../utils/promisify';
 import config from '../config/index';
 
 import { addLogin, delLogin, getLogin, isLogin } from '../store/login/index';
@@ -59,12 +59,14 @@ const wxLogin = function(data = null) {
                     encryptedData = '',
                     iv = ''
                 } = data;
+                
                 Object.assign(params, { nickName, avatarUrl, encryptedData, iv });
             }
             return ajax({
                 url: url.common.login,
                 method: 'POST',
-                data: params
+                data: params,
+                toast: false
             });
         })
         .then(res => {
@@ -84,7 +86,7 @@ const wxLogin = function(data = null) {
             }
         })
         .catch(err => {
-            console.log(err);
+            pifyShowToastErr(getErrorMsg(err));
             return Promise.reject(err);
         });
 };

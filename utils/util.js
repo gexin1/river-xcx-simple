@@ -12,9 +12,14 @@ const getErrorMsg = (err, defaultMsg = '') => {
     if (!err) return;
     let errorMsg = '';
     if (typeof err === 'string') return err;
+
+    if (err && typeof err.errMsg === 'string') {
+        return err.errMsg;
+    }
     if (err && typeof err.errMsg === 'string' && /cancel/.test(err.errMsg)) {
         return '';
     }
+
     if (typeof err === 'object' && 'code' in err) {
         if (err.msg) {
             errorMsg = `${err.msg}`;
@@ -259,4 +264,4 @@ function queryToString(data = {}) {
     return str ? `?${str}` : '';
 }
 
-export { config, authorityControl, ajax, upload, isEmpty, queryToString };
+export { config, authorityControl, ajax, getErrorMsg, upload, isEmpty, queryToString };

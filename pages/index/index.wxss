@@ -1,0 +1,34 @@
+.box1 {
+    width: 50rpx;
+    height: 20px;
+    background: red;
+    margin-top: 20rpx;
+}
+.box3 {
+    width: 100%;
+    height: 60rpx;
+    background: lightblue;
+    margin-top: 10rpx;
+    margin-top: 20rpx;
+}
+.box5 {
+    width: 300rpx;
+    height: 300rpx;
+    background: #000;
+    margin-top: 20rpx;
+}
+.box6 {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 50%;
+    background: chocolate;
+    margin-top: 20rpx;
+}
+
+.skeleton-body .el {
+    position: fixed;
+    background: #000;
+}
+.skeleton-body .el.circle{
+    border-radius: 50%;
+}
