@@ -1,22 +1,45 @@
 # mini-lib-simple
 
 ### 文件夹规范
+
+* api 
+   * common-api  
+    >项目所有的公共api 存放
+   * *-api 
+    >项目其他api 存放
+* lib 
+>存放项目公共的一些依赖
+* template 
+>一些公共的template 模版文件
+* utils //公共方法
+  * promisify.js
+   >一些api 返回变为promise 同时在初始化启动的时候把 
+   >pify*的api挂载在wx对象上
+  * promisify-finally.js
+   > 给promise增加finally兼容 初始化的时候会加上
+  * util.js
+   > 一些公共方法存放
+  * util.wxs
+   > 一些公共的wxs存放
+  * update-app.js
+   >小程序更新后提示用户重启更新 默认在init-start引入
+* config.js 
+>项目公共配置
+* data-statistics //数据埋点 
+>里边可以封装对项目的埋点
+* init-start 
+>初始化启动 会把promise的api挂载在wx上
+* store 
+>全局数据存储
 ```
-api //接口
-lib //项目依赖库
-template //wxml模版
-utils //公共方法
-config.js //项目公共配置
-data-statistics //数据埋点 
-init-start //初始化启动 会把promise的api挂载在wx上
-store  //全局数据存储
-```
+
 ### 项目格式
 * js 使用 vscode pretter
 * wxml fromat  使用 vscode wxml
 
 ### 优化
 [腾讯文档优化建议](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/tips.html)
+
 ### JS
 ``` javascript
 //setData 直接使用key修改
