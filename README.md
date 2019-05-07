@@ -1,6 +1,6 @@
 # mini-lib-simple
 
-#### 文件夹规范
+### 文件夹规范
 ```
 api //接口
 lib //项目依赖库
@@ -11,11 +11,66 @@ data-statistics //数据埋点
 init-start //初始化启动 会把promise的api挂载在wx上
 store  //全局数据存储
 ```
-#### 项目格式
+### 项目格式
+* js 使用 vscode pretter
+* wxml fromat  使用 vscode wxml
 
-> js 使用 vscode pretter
->  
-> wxml fromat  使用 vscode wxml
+### 优化
+[腾讯文档优化建议](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/tips.html)
+### JS
+``` javascript
+//setData 直接使用key修改
+//不在页面渲染的数据的使用_data来保存变量
+Page({
+    data:{
+        user:{
+            name:'uzi'
+        }
+    },
+    _data:{},
+    onLoad(){
+        this.setData({
+            [`user.name`]:'ming'
+        });
+    }
+})
+```
+### wxml
+
+* 图片使用image和background-image选择 [点击打开=>渲染图片性能测试](https://developers.weixin.qq.com/s/QAQUO9mf748u)
+* 注意不要渲染太多的节点
+  * 想办法销毁一部分节点使用wx:if
+
+### 组件
+
+* swiper
+> 节点数量太多和用户滑动太快,会卡死
+
+### 原生组件
+
+* camera
+* canvas
+* input（仅在focus时表现为原生组件）
+* live-player
+* live-pusher
+* map
+* textarea
+* video
+>原生组件可以在scroll-view 里边滚动 但是原生组件的宽高不能和scroll-view一样大小
+### api
+
+```
+wx.chooseImage 
+```
+> sizeType 没什么作用  安卓图片会比较小  ios 会比较大
+
+> 因为这个api 调用的是原生组件有时候在部分会比较卡 具体表现为选择完图片会卡住等一会才会到成功回调
+
+### wxss
+
+* flex 布局
+* grid 布局
+
 
 
 
