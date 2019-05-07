@@ -263,7 +263,7 @@ function queryToString(data = {}) {
         str += `${key}=${data[key]}&`;
     }
     str = str.substring(0, str.length - 1);
-    return `?${str}`;
+    return str ? `?${str}` : '';
 }
 
 export { config, authorityControl, ajax, upload, isEmpty, queryToString };

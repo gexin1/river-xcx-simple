@@ -11,11 +11,7 @@ App({
         const { system, windowWidth, statusBarHeight, model } = device;
         this.globalData.navTop=statusBarHeight;
         let navHeight = statusBarHeight;
-
-
-        
         navHeight += (92 * windowWidth) / 750;
-
         this.globalData.navHeight = navHeight;
         this.globalData.device = device;
     },
