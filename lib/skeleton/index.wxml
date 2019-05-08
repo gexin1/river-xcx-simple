@@ -1,0 +1,16 @@
+<template name="skeleton">
+    <view
+        class="skeleton-body"
+        wx:if="{{SKELETON_SHOW}}"
+        capture-catch:touchstart="skeletonPrevent"
+        capture-catch:touchmove="skeletonPrevent"
+    >
+        <view
+            class="el {{item.dataset.skeleton}}"
+            wx:for="{{SKELETON_LIST}}"
+            wx:key="{{index}}"
+            style="width:{{item.width}}px;height:{{item.height}}px;left:{{item.left}}px;top:{{item.top}}px"
+        />
+    </view>
+    ;
+</template>;

@@ -1,3 +1,5 @@
+@import '../../lib/skeleton/index.wxss';
+
 .box1 {
     width: 50rpx;
     height: 20px;
@@ -23,12 +25,4 @@
     border-radius: 50%;
     background: chocolate;
     margin-top: 20rpx;
-}
-
-.skeleton-body .el {
-    position: fixed;
-    background: #000;
-}
-.skeleton-body .el.circle{
-    border-radius: 50%;
 }

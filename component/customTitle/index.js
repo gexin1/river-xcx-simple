@@ -47,7 +47,7 @@ Component({
         },
         title: {
             type: String,
-            value: '种草主义'
+            value: '默认title'
         },
         autoNavigation: {
             type: Boolean,

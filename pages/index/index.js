@@ -1,5 +1,5 @@
 const app = getApp();
-
+import Skeleton from '../../lib/skeleton/index';
 Page({
     /**
      * 页面的初始数据
@@ -8,23 +8,14 @@ Page({
         navTop: app.globalData.navTop,
         leftBtn: {
             hide: true
-        },
-        skeletonList: [],
-        showSkeleton: true
+        }
     },
+    skeletonPrevent: Skeleton.skeletonPrevent,
     onLoad() {
-        // wx.pifyShowModel({
-        //     content: '我是一个提示框'
-        // });
+        this.skeleton = new Skeleton(this);
     },
     onReady() {
-        const query = wx.createSelectorQuery();
-        query.selectAll('.skeleton').boundingClientRect(res => {
-            this.setData({
-                skeletonList: res
-            });
-        });
-        query.exec();
+        this.skeleton.init();
     },
     reqLogin() {
         wx.$http

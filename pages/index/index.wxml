@@ -1,21 +1,15 @@
+<import src="../../lib/skeleton/index.wxml" />
+
+<template is="skeleton" data="{{SKELETON_LIST:SKELETON_LIST,SKELETON_SHOW:SKELETON_SHOW}}"></template>
+
 <view class="contain" style="padding-top:calc({{navTop}}px + 92rpx);">
-    <custom-title
-        custom-title-extend="custom-title-extend"
-        left-btn="{{leftBtn}}"
-        auto-navigation="{{autoNavigation}}"
-    />
-    <view class="body">
-        <view class="box1 skeleton" />
-        <view class="box3 skeleton" />
-        <view class="box5 skeleton" />
-        <view class="box6 skeleton" data-skeleton="circle" />
-    </view>
-    <view class="skeleton-body" wx:if="{{showSkeleton}}">
-        <view
-            class="el {{item.dataset.skeleton}}"
-            wx:for="{{skeletonList}}"
-            wx:key="{{index}}"
-            style="width:{{item.width}}px;height:{{item.height}}px;left:{{item.left}}px;top:{{item.top}}px"
-        />
-    </view>
-</view>;
+	<custom-title title='骨架屛测试' custom-title-extend="custom-title-extend" left-btn="{{leftBtn}}" auto-navigation="{{autoNavigation}}" />
+	<view class="body">
+		<view class="box1 skeleton" />
+		<view class="box3 skeleton" />
+		<view class="box5 skeleton" />
+		<view class="box6 skeleton" data-skeleton="circle" />
+	</view>
+</view>
+
+
