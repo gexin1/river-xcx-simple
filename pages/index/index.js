@@ -14,8 +14,12 @@ Page({
     onLoad() {
         this.skeleton = new Skeleton(this);
     },
-    onReady() {
+    onReady() {},
+    onShow() {
         this.skeleton.init();
+        setTimeout(() => {
+            this.skeleton.close();
+        }, 2000);
     },
     reqLogin() {
         wx.$http

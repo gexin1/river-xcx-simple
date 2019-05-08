@@ -1,0 +1,7 @@
+<view class="contain" style="padding-top:calc({{navTop}}px + 92rpx);">
+    <custom-title title="api请求和promise使用" left-btn="{{leftBtn}}" auto-navigation="{{false}}" />
+    <view class="body">
+        <button bindtap='login'>登陆</button>
+        <button bindtap='chooseImg'>选择照片</button>
+    </view>
+</view>;

@@ -1,0 +1,6 @@
+.body{
+    padding: 50rpx;
+}
+.body button {
+    margin-top: 20rpx;
+}

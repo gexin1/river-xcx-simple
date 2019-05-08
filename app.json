@@ -1,35 +1,32 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/about/about"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
-  },
-  "tabBar": {
-    "color": "#000000",
-    "selectedColor": "#FE5C3B",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "种草广场",
-        "iconPath": "assets/imgs/tabber/index.png",
-        "selectedIconPath": "assets/imgs/tabber/index_active.png"
-      },
-      {
-        "pagePath": "pages/about/about",
-        "text": "我的",
-        "iconPath": "assets/imgs/tabber/my.png",
-        "selectedIconPath": "assets/imgs/tabber/my_active.png"
-      }
-    ]
-  },
-  "usingComponents": {
-    "custom-title": "component/customTitle/index"
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": ["pages/about/about", "pages/index/index"],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
+    "tabBar": {
+        "color": "#000000",
+        "selectedColor": "#FE5C3B",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "assets/imgs/tabber/index.png",
+                "selectedIconPath": "assets/imgs/tabber/index_active.png"
+            },
+            {
+                "pagePath": "pages/about/about",
+                "text": "api",
+                "iconPath": "assets/imgs/tabber/my.png",
+                "selectedIconPath": "assets/imgs/tabber/my_active.png"
+            }
+        ]
+    },
+    "usingComponents": {
+        "custom-title": "component/custom-title/index"
+    },
+    "sitemapLocation": "sitemap.json"
 }
