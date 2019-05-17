@@ -16,11 +16,10 @@ mountPifyApi();
 wx.$shareMessage = () => {
     return {
         path: '/pages/index/index',
-        imageUrl: `https://xcx-album-img.zmwxxcx.com/5ca6a1503cdf43a2960b6ca63986c449-thumbnail`,
-        title: '写文章,晒图片,轻松赚钱'
+        imageUrl: ``,
+        title: ''
     };
 };
-
 
 function mountPifyApi() {
     Object.keys(promisify).forEach(key => {
